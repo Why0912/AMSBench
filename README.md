@@ -5,7 +5,7 @@ Dataset is available at https://huggingface.co/datasets/wwhhyy/AMSBench
 Code will be released soon.
 
 
-!([https://huggingface.co/datasets/wwhhyy/AMSBench](https://github.com/user-attachments/assets/0335c755-0dd9-44d6-8470-1543d1368bb8))
+![image](https://github.com/user-attachments/assets/0335c755-0dd9-44d6-8470-1543d1368bb8)
 
 
 ![image](https://github.com/user-attachments/assets/d8ba68ff-c73f-4a3e-a1e1-8153e52f2a02)
