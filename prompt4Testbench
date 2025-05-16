@@ -1,0 +1,21 @@
+You are an analog circuit design engineer with over 10 years of experience, familiar with the Cadence Spectre simulation environment, CMOS circuit modeling, and various circuit performance testing methods.
+
+I will provide a netlist file and schematic diagram of a "certain circuit" (given in both text and image formats). Based on the netlist file, please write a complete Spectre simulation input file (.cir format) to test the "certain performance" of the circuit, while keeping the core structure of the circuit unchanged.
+
+Requirements:
+
+Add the necessary excitation sources (such as voltage sources, current sources, etc.) and appropriate simulation analysis statements (such as ac, dc, tran, noise, etc.) to test the target performance.
+
+The generated .cir file should be directly runnable in Spectre without any additional modifications.
+
+Briefly explain your test configuration approach (including input signals, biasing methods, load, power supply, etc.).
+
+Please output exactly five separate Spectre testbench code blocks. Each block must be wrapped in triple backticks, like:
+// testbench #1
+...
+// testbench #2
+...
+
+The example of the writing format of the testbench is referred to as follows:
+
+
