@@ -85,7 +85,7 @@ We evaluated 8 leading MLLMs, and our findings reveal significant limitations in
 * **Design**: Performance is poor on complex circuits. Crucially, **no model could consistently generate syntactically correct testbenches**, likely due to a lack of relevant training data.
 
 <p align="center">
-  <img src="https://amsbench.github.io/static/images/tab_perception.png" alt="Perception Task Results" width="80%">
+  <img src="https://amsbench.github.io/static/images/tab_perception.png" alt="Perception Task Results" width="60%">
   <br/>
   <img src="https://amsbench.github.io/static/images/tab_design_tb.png" alt="Design & Testbench Task Results" width="60%">
 </p>
