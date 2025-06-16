@@ -1,14 +1,5 @@
 # AMSbench: A Comprehensive Benchmark for Evaluating MLLM Capabilities in AMS Circuits
 
-Dataset is available at https://huggingface.co/datasets/wwhhyy/AMSBench
-
-The homepage of the thesis is available at https://amsbench.github.io/
-
-The pdf version of the thesis can be obtained here https://arxiv.org/pdf/2505.24138
-
-
-# AMSbench: A Comprehensive Benchmark for Evaluating MLLM Capabilities in AMS Circuits
-
 <p align="center">
   <img src="https://amsbench.github.io/static/images/AMSBench_banner.png" alt="AMSbench Banner" width="80%">
 </p>
@@ -33,38 +24,63 @@ To address this gap, we introduce **AMSbench**. Our benchmark comprises approxim
 
 ---
 
-## 🛠️ Benchmark Construction
+## 💡 Why AMSbench? The Challenge of AMS Circuits
 
-The creation of AMSbench involved a meticulous, multi-stage process to ensure its comprehensiveness and quality.
+Analog/Mixed-Signal (AMS) circuits are the bedrock of modern electronic systems, but their design process is highly dependent on the experience and intuition of engineers. Unlike natural images or plain text, circuit diagrams present unique challenges for MLLMs:
 
-### Data Collection & Curation
+* **Structured Knowledge**: Circuit diagrams are highly structured, containing components, connection relationships (topology), and hierarchical designs.
+* **Symbolic Language**: They use a standardized symbolic language that requires precise identification and understanding.
+* **Implicit Functionality**: The function of a circuit depends not only on its individual components but on the complex interactions between them.
 
-To build a robust benchmark, we collected data from various authoritative sources, including academic textbooks, research papers, and industrial datasheets. We used specialized tools like **MinerU** to process PDFs and **AMSnet** to generate netlists from schematics. This foundation was enhanced by combining expert annotations with MLLM-generated outputs to create high-quality "circuit-caption" data pairs.
+While current MLLMs excel in general domains, they struggle to comprehend this specialized graphical language without targeted training. Therefore, a standard benchmark is crucial to measure their capabilities in this specialized field and to guide future research.
+
+---
+
+## 🛠️ Benchmark Construction Process
+
+To ensure the benchmark's quality and comprehensiveness, we adopted a rigorous data construction pipeline:
+
+1.  **Data Collection**: We extensively gathered various circuit diagrams and related information from authoritative academic textbooks, cutting-edge research papers, and industrial product datasheets.
+2.  **Data Processing**: We utilized advanced tools like **MinerU** and **AMSnet** to parse PDF documents, extract circuit diagrams, and generate initial netlists.
+3.  **Data Annotation and Generation**:
+    * **Expert Annotation**: Domain experts were invited to perform detailed manual annotations of the circuit diagrams.
+    * **MLLM-Assisted Generation**: We leveraged MLLMs (like GPT-4V) to generate preliminary "circuit-caption" data pairs.
+    * **Quality Control**: All MLLM-generated content was rigorously reviewed and corrected by our expert team to ensure data accuracy and professional quality.
+4.  **Tiered Question Design**: We stratified questions into three difficulty levels—**Easy, Medium, and Hard**—to comprehensively evaluate model capabilities, from basic cognition to deep reasoning.
 
 <p align="center">
   <img src="https://amsbench.github.io/static/images/data_collection.png" alt="Data Collection Pipeline" width="80%">
 </p>
 
-### Question Generation & Task Design
-
-AMSbench covers both **Visual and Textual Question Answering (VQA/TQA)**. Questions are carefully tiered into three difficulty levels (**Easy, Medium, Hard**) to simulate knowledge requirements from undergraduate students to professional engineers. This tiered approach ensures a thorough and granular evaluation of a model's capabilities, from basic perception to deep, analytical reasoning.
-
-<p align="center">
-  <img src="https://amsbench.github.io/static/images/question_generation.png" alt="Question Generation Examples" width="80%">
-</p>
-
 ---
 
-## 📊 Benchmark Structure & Data Statistics
+## 🎯 Core Capabilities & Tasks
 
-AMSbench is structured around three core capabilities: **Perception, Analysis, and Design**. The dataset is carefully balanced to provide a robust evaluation framework.
+AMSbench is designed around three core capability dimensions, encompassing approximately 8,000 test questions.
 
-The benchmark consists of:
-* **~6,000** questions for **AMS-Perception**
-* **~2,000** questions for **AMS-Analysis**
-* **~68** questions for **AMS-Design**
+### 1. AMS-Perception
+* **Objective**: To evaluate the fundamental visual understanding of circuit diagrams by MLLMs.
+* **Task Examples**:
+    * Identifying and locating specific components (e.g., MOSFETs, resistors, capacitors).
+    * Extracting the complete circuit connectivity (netlist extraction).
+    * Recognizing basic circuit topologies.
+* **Question Count**: ~6,000
 
-The difficulty levels are defined by component counts for Perception tasks and by the required academic/professional level for Analysis tasks, ensuring a comprehensive assessment of both visual understanding and domain knowledge.
+### 2. AMS-Analysis
+* **Objective**: To evaluate the deep understanding and reasoning capabilities of MLLMs regarding circuit functionality and performance.
+* **Task Examples**:
+    * Analyzing the core function of a circuit (e.g., is this an amplifier or a comparator?).
+    * Understanding how changes in component parameters affect circuit performance.
+    * Explaining the performance trade-offs.
+* **Question Count**: ~2,000
+
+### 3. AMS-Design
+* **Objective**: To evaluate the potential of MLLMs in automated circuit design workflows.
+* **Task Examples**:
+    * Generating a circuit schematic based on given performance specifications (e.g., gain, bandwidth).
+    * Creating a valid simulation testbench for a given circuit.
+    * Fixing or optimizing design flaws in an existing circuit.
+* **Question Count**: 68
 
 <p align="center">
   <img src="https://amsbench.github.io/static/images/data.png" alt="Data Statistics" width="80%">
@@ -72,20 +88,21 @@ The difficulty levels are defined by component counts for Perception tasks and b
 
 ---
 
-## 🔬 Evaluation & Key Findings
+## 🔬 Model Evaluation & Key Findings
 
-We evaluated 8 leading MLLMs, and our findings reveal significant limitations in the current state-of-the-art models, especially in complex reasoning and design tasks.
+We conducted a comprehensive evaluation of 8 leading MLLMs. The main findings reveal the current state and future challenges for MLLMs in the AMS domain.
 
 <p align="center">
   <img src="https://amsbench.github.io/static/images/rada.png" alt="Model Performance Radar Chart" width="50%">
 </p>
 
-* **Perception**: While models show promise in recognizing local connectivity, their effectiveness deteriorates when performing comprehensive netlist extraction. Even the best-generated netlists require substantial modifications to match the ground truth.
-* **Analysis**: Models show potential but often fail to grasp key performance trade-offs, a critical skill for engineers. Some models arrive at correct answers through flawed reasoning.
-* **Design**: Performance is poor on complex circuits. Crucially, **no model could consistently generate syntactically correct testbenches**, likely due to a lack of relevant training data.
+* **Widespread Limitations**: All existing models exhibit certain limitations when handling complex AMS circuit tasks.
+* **Adequate Perception Capability**: Most models can perform basic component identification tasks reasonably well, but struggle with extracting complete and accurate netlists.
+* **Deficiencies in Analysis and Design**: Performance drops significantly in analysis and design tasks that require deep reasoning. Models find it difficult to fully comprehend performance trade-offs and are unable to generate valid testbenches.
+* **A Clear Path Forward**: The evaluation results clearly identify the shortcomings of current MLLMs, providing a distinct direction for future model optimization and algorithm research.
 
 <p align="center">
-  <img src="https://amsbench.github.io/static/images/tab_perception.png" alt="Perception Task Results" width="60%">
+  <img src="https://amsbench.github.io/static/images/tab_perception.png" alt="Perception Task Results" width="80%">
   <br/>
   <img src="https://amsbench.github.io/static/images/tab_design_tb.png" alt="Design & Testbench Task Results" width="60%">
 </p>
@@ -130,7 +147,3 @@ If you use AMSbench in your research, please cite our paper:
       url={[https://arxiv.org/abs/2505.24138](https://arxiv.org/abs/2505.24138)}, 
 }
 ```
-
-
-
-
