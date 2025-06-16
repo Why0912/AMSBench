@@ -102,7 +102,7 @@ We conducted a comprehensive evaluation of 8 leading MLLMs. The main findings re
 * **A Clear Path Forward**: The evaluation results clearly identify the shortcomings of current MLLMs, providing a distinct direction for future model optimization and algorithm research.
 
 <p align="center">
-  <img src="https://amsbench.github.io/static/images/tab_perception.png" alt="Perception Task Results" width="80%">
+  <img src="https://amsbench.github.io/static/images/tab_perception.png" alt="Perception Task Results" width="60%">
   <br/>
   <img src="https://amsbench.github.io/static/images/tab_design_tb.png" alt="Design & Testbench Task Results" width="60%">
 </p>
