@@ -33,6 +33,7 @@ Analog/Mixed-Signal (AMS) circuits are the bedrock of modern electronic systems,
 * **Implicit Functionality**: The function of a circuit depends not only on its individual components but on the complex interactions between them.
 
 While current MLLMs excel in general domains, they struggle to comprehend this specialized graphical language without targeted training. Therefore, a standard benchmark is crucial to measure their capabilities in this specialized field and to guide future research.
+![image](https://github.com/user-attachments/assets/84853d3d-a2be-4ebe-9b10-fa7009f6d7df)
 
 ---
 
